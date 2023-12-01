@@ -10,7 +10,7 @@ public class GooglePageTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		// 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
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://www.google.com");
