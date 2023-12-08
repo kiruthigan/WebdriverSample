@@ -5,7 +5,7 @@
     <classes>
       <class name="testScripts.SampleOneTest">
         <methods>
-          <include name="SeleniumSearchTest"/>
+          <include name="closin"/>
           <include name="setup"/>
           <include name="cucumberSearchTest"/>
         </methods>
