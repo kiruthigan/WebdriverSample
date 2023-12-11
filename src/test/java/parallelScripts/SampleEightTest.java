@@ -7,7 +7,7 @@ public class SampleEightTest {
 	@Test
 	  public void testOne() {
 		  long id = Thread.currentThread().getId();
-		  System.out.println("Test1 in SampleEight" +id);
+		  System.out.println("Test1 in SampleEight" +id); 
 	  }
 		  
 		  @Test
