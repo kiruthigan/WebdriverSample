@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -15,7 +16,12 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.ViewName;
+
+import commonUtils.Utility;
+
 import com.aventstack.extentreports.ExtentReports;
 
 
@@ -30,7 +36,16 @@ public class ExtentReport1 {
 	public void setupExtent()
 	{
 	extentReports = new ExtentReports();
-	spark =new ExtentSparkReporter("test-output/SparkReport.html");
+	spark =new ExtentSparkReporter("test-output/SparkReport.html")
+			.viewConfigurer()
+			.viewOrder()
+			.as(new ViewName[] {
+					ViewName.DASHBOARD,
+					ViewName.TEST,
+					ViewName.AUTHOR,
+					ViewName.DEVICE,
+					ViewName.LOG
+			}).apply();
 	extentReports.attachReporter(spark);
 	
 	
@@ -51,6 +66,14 @@ public class ExtentReport1 {
 	
 	public void tearDown()
 	{
+		extentTest.assignAuthor("AutomationTester")
+		.assignCategory("Regression")
+		.assignDevice(System.getProperty("os.name"))
+		.assignDevice(System.getProperty("os.version"));
+		
+	/*{if(ITestResult.FAILURE==result.getStatus())
+		extentTest.log(Status.FAIL,result.getThrowable().getMessage());
+		//String strpath = Utility.*/
 		driver.close();
 	}
   @Test
